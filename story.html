@@ -28,7 +28,7 @@
   esriConfig.apiKey = "AAPKea6d37ba40b14c7d94158cefd1dc673dAjY_1swp_CkZNZCJCMVM4BhFqNXsWGuGnsecbuBhhEvAe2FWEKgt9tP54ZV6LTwV";
 
   const map = new Map({
-    basemap: "arcgis-topographic" // basemap styles service
+    basemap: "arcgis-imagery" // basemap styles service
   });
 
   const view = new MapView({
@@ -41,16 +41,31 @@
  const graphicsLayer = new GraphicsLayer();
  map.add(graphicsLayer);
 
-
+ const multipoint = { //Create a point
+    type: "multipoint",
+    points: [
+        [75.748283, 20.534033], // Ajanta Caves Longitude, latitude
+        [75.161858, 20.022638], //Ellora Caves Longitude, latitude
+        [77.242943, 28.656473],//Red Fort Complex Longitude, latitude
+        [78.042068, 27.173891], //Taj Mahal Longitude, latitude
+        [76.468536, 15.334022], //Group of Monuments at Hampi Longitude, latitude
+        [84.986954, 24.696135], //Mahabodhi Temple Complex at Bodh Gaya Longitude, latitude
+    ]
+ };
  const simpleMarkerSymbol = {
     type: "simple-marker",
-    color: [226, 119, 40],  // Orange
+    color: [0,250,0],  // Orange
     outline: {
         color: [255, 255, 255], // White
         width: 1
     }
  };
 
+ const multipointGraphic = new Graphic({
+    geometry: multipoint,
+    symbol: simpleMarkerSymbol
+ });
+ graphicsLayer.add(multipointGraphic);
 
  const polyline = {
     type: "polyline",
@@ -65,7 +80,7 @@
  };
  const simpleLineSymbol = {
     type: "simple-line",
-    color: [255, 0, 0], // Red
+    color: [0, 0, 250], // Red
     width: 2
  };
 
