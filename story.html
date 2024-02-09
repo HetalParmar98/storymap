@@ -1,0 +1,87 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>UNESCO World Heritage Site in India</title>
+  <style>
+    html, body, #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.28/"></script>
+  <script>
+
+  require([
+    "esri/config",
+    "esri/Map",
+    "esri/views/MapView",
+
+    "esri/Graphic",
+    "esri/layers/GraphicsLayer"
+
+    ], function(esriConfig,Map, MapView, Graphic, GraphicsLayer) {
+
+  esriConfig.apiKey = "AAPKea6d37ba40b14c7d94158cefd1dc673dAjY_1swp_CkZNZCJCMVM4BhFqNXsWGuGnsecbuBhhEvAe2FWEKgt9tP54ZV6LTwV";
+
+  const map = new Map({
+    basemap: "arcgis-topographic" // basemap styles service
+  });
+
+  const view = new MapView({
+    map: map,
+    center: [77.216721,28.644800], //Longitude, latitude
+    zoom: 4.5,
+    container: "viewDiv"
+ });
+
+ const graphicsLayer = new GraphicsLayer();
+ map.add(graphicsLayer);
+
+
+ const simpleMarkerSymbol = {
+    type: "simple-marker",
+    color: [226, 119, 40],  // Orange
+    outline: {
+        color: [255, 255, 255], // White
+        width: 1
+    }
+ };
+
+
+ const polyline = {
+    type: "polyline",
+    paths: [
+        [75.748283, 20.534033], // Ajanta Caves Longitude, latitude
+        [75.161858, 20.022638], //Ellora Caves Longitude, latitude
+        [77.242943, 28.656473],//Red Fort Complex Longitude, latitude
+        [78.042068, 27.173891], //Taj Mahal Longitude, latitude
+        [76.468536, 15.334022], //Group of Monuments at Hampi Longitude, latitude
+        [84.986954, 24.696135] // Mahabodhi Temple Complex at Bodh Gaya Longitude, latitude
+    ]
+ };
+ const simpleLineSymbol = {
+    type: "simple-line",
+    color: [255, 0, 0], // Red
+    width: 2
+ };
+
+ const polylineGraphic = new Graphic({
+    geometry: polyline,
+    symbol: simpleLineSymbol
+ });
+ graphicsLayer.add(polylineGraphic);
+
+
+
+
+ });
+</script>
+</head>
+<body>
+  <div id="viewDiv"></div>
+</body>
+</html>
